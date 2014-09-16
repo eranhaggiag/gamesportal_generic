@@ -1,0 +1,10 @@
+.idea
+ignored
+build/
+node_modules/
+src/bower_components/
+ie8/.idea
+ie8/build/
+ie8/node_modules/
+ie8/src/bower_components/
+

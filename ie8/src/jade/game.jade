@@ -1,0 +1,39 @@
+.game-wrapper(ng-show="game.name")
+    .game-embed-container
+        .main
+            .left
+                .header
+                .more-games-left(ng-if="appName==='Gamestab'")
+                    .game(ng-repeat="game in evenMoreGames | limitTo:5")
+                        a(ui-sref="game({gameID: game.id})")
+                            img.game-thumbnail(ng-src="{{game.thumbnails[0].url}}")
+                            div.name(ng-bind="game.name")
+                .left-ad-unit(ng-if='appName==="Mojo Games"')
+                    adsense-ad(ad-sense-loaded="adSenseLoaded", ad-slot-id="6643318803", ad-width="160", ad-height="600")
+            .middle
+                .header
+                    h1.game-name(ng-bind="game.name")
+                .embedding
+                    .include(ng-if="game.source", ng-include="'embeds/embed-' + game.source + '.html'")
+                        #flashGame
+                            a(href="http://get.adobe.com/flashplayer/", target="_blank")
+                                img(src="./img/getFlash.png")
+                .loader
+                    h1 Loading Game...
+                    img(src="./img/ajax-loader.gif")
+                .game-description(ng-bind-html="game.description")
+            .right
+                .header
+                .right-ad-unit
+                    //* Ad4Game iFrame Tag */
+                    div(ng-if="appName==='Gamestab'")
+                        include includes/skyscraper-right-gamestab
+                    div(ng-if='appName==="Mojo Games"')
+                        adsense-ad(ad-sense-loaded="adSenseLoaded", ad-slot-id="9736386005", ad-width="160", ad-height="600")
+        div(ng-class='appName==="Mojo Games" ? "bottom-mojo" : "bottom"')
+            .more-games-bottom
+                .game(ng-repeat="game in moreGames")
+                    a(ui-sref="game({gameID: game.id})")
+                        img.game-thumbnail(ng-src="{{game.thumbnails[0].url}}")
+                        .name(ng-bind="game.name")
+

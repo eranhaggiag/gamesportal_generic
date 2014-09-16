@@ -1,0 +1,79 @@
+div.edit-game-wrapper.container(ng-show="game")
+    h1 ({{gameIndex}}) Edit Game:
+        strong(ng-bind="game.name")
+    div.img(ng-repeat="thumb in game.thumbnails")
+        div(style="text-align:center") {{thumb.width}} x {{thumb.height}}
+        div(style="text-align:center")
+            img(ng-src="{{thumb.url}}")
+    div(style="text-align:center;margin:10px;")
+
+    .embedding(ng-style="{width : game.width + 'px', height : game.height + 'px', margin: '10px auto'}", ng-if="playTheGame")
+        div.include(ng-include="'embed-' + game.source + '.html'",ng-if="game")
+
+    div.row
+        div.col-md-4
+        div.col-md-4
+            div.form-group
+                label
+                    input(type="checkbox", ng-model="game.premium")
+                    |  Is Premium ?
+            div.form-group(ng-show="game.premium")
+                label(for="") Price
+                input.form-control(type="text", ng-model="game.price")
+
+            div.form-group
+                label
+                    input(type="checkbox", ng-model="game.hot")
+                    |  Is HOT ?
+            div.form-group
+                label(for="") Priority
+                input.form-control(type="text", ng-model="game.priority")
+                span Lower is better. Good game is less than 100, Bad game is more than 1000.
+        div.col-md-4
+            p
+                b Category :
+                span(ng-bind="game.category")
+            p
+                b Author :
+                span(ng-bind="game.author")
+
+    div.row(style="text-align:center;margin:20px 0;")
+        div.col-md-6.col-md-offset-2(style="text-align:center;")
+            button.btn.btn-lg.btn-default(ng-click="playTheGame=true", ng-show="!playTheGame") Show Game
+            button.btn.btn-lg.btn-success(ng-click="nextAndSave()") Next & Save
+
+    div.row
+        div.col-md-6
+            div.form-group
+                label(for="") ID
+                input.form-control(type="text", ng-model="game.id")
+            div.form-group
+                label(for="") UUID
+                input.form-control(type="text", ng-model="game.uuid")
+            div.form-group
+                label(for="") Name
+                input.form-control(type="text", ng-model="game.name")
+            div.form-group
+                label(for="") Source
+                input.form-control(type="text", ng-model="game.source")
+
+            div.form-group
+                label(for="") Category
+                input.form-control(type="text", ng-model="game.category")
+        div.col-md-6
+            div.form-group
+                label(for="") Instructions
+                textarea.form-control(type="text", ng-model="game.instructions", rows="3")
+            div.form-group
+                label(for="") Description
+                textarea.form-control(type="text", ng-model="game.description", rows="3")
+
+    div.row
+        div.col-md-4.col-md-offset-4
+            button.btn.btn-danger(ng-click="previousGame()") Previous
+            button.btn.btn-success(ng-click="nextAndSave()") Next & Save
+
+    div.row
+        div.col-md-12
+            p Raw Data
+            textarea.form-control(rows="8", ng-bind="game")

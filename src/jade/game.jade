@@ -1,0 +1,81 @@
+.game-wrapper(ng-show="game.name")
+    .game-embed-container
+        .main
+            .left
+                .header
+                .more-games-left
+                    .game(ng-repeat="game in evenMoreGames | limitTo:5")
+                        a(ui-sref="game({gameID: game.id})")
+                            img.game-thumbnail(ng-src="{{game.thumbnails[0].url}}")
+                            div.name(ng-bind="game.name")
+            .middle
+                .header
+                    h1.game-name(ng-bind="game.name")
+                    .game-rating
+                        .rating-box
+                            rating.rating-stars(title="{{'Rating: ' + getGameRating(game)}}", value="getGameRating(game)", max="5", readonly="true", state-on="'star-up glyphicon-star'", state-off="'star-down glyphicon-star-empty'")
+                            .thumbs-down-container(title="Rate game down", ng-click="rateGame(game, 'down')")
+                                .icon.glyphicon.glyphicon-thumbs-down
+                            .thumbs-up-container(title="Rate game up", ng-click="rateGame(game, 'up')")
+                                .icon.glyphicon.glyphicon-thumbs-up
+                            span(style="font-size:13px;", ng-show="votingProgress") Sending Vote...
+                    .addthis_toolbox.addthis_default_style(style="float:right;margin-top:12px;overflow:hidden;")
+                        a.addthis_button_facebook_like(style='margin-right:35px; width:49px !important;height:20px !important;z-index:999999;overflow:visible;', fb:like:layout="button_count", addthis:url="/#/games/{{game.id}} ")
+                        //- a.addthis_button_twitter_follow_native(tf:screen_name="DaRealMojoGames", tf:show-screen-name="false", tf:show-count="false")
+                        a.addthis_button_google_plusone(style='margin-right:35px; width:30px !important;height:18px !important;z-index:999999;overflow:visible;',g:plusone:href="/#/games/{{game.id}}", g:plusone:size="medium")
+
+                .embedding
+                    .include(ng-if="!showPreRoll", ng-cloak="ng-cloak",ng-include="'embeds/preloader.html'",class="include preloader")
+                    .include(ng-if="game.source",ng-include="'embeds/embed-' + game.source + '.html'", id="gameContainer", ng-style="gameContainerStyle")
+                        #flashGame
+                            a(href="http://get.adobe.com/flashplayer/", target="_blank")
+                                img(src="./img/getFlash.png")
+                .loader
+                    h1 Loading Game...
+                    img(src="./img/ajax-loader.gif")
+                .game-description(ng-bind-html="game.description")
+            .right
+                .header
+                .right-ad-unit
+        div(ng-class='appName==="Mojo Games" ? "bottom-mojo" : "bottom"')
+            .more-games-bottom
+                .game(ng-repeat="game in moreGames")
+                    a(ui-sref="game({gameID: game.id})")
+                        img.game-thumbnail(ng-src="{{game.thumbnails[0].url}}")
+                        .name(ng-bind="game.name")
+            div(class="fb-comments" ,data-href="{{currentUrl}}", data-numposts="5", data-colorscheme="light")
+
+.modal-overlay-fade.premium-game-modal(ng-show="overlayUnlockGame", ng-cloak)
+    .modal-dialog
+        .close-button(ng-click="goHome()")
+        h1 Unlock Premium Game
+        .game-to-unlock
+            h2.game-name(ng-bind="lockedGame.name")
+            .game-thumbnail
+                img(ng-src="{{lockedGame.thumbnails[0].url}}")
+        .price-wrapper
+            img(src="./img/coins2.png")
+            span.price {{(lockedGame.price || 1000) | number}} COINS
+        .bottom-action
+            //- unlock game
+            div(ng-if="userData.user.points >= lockedGame.price")
+                button(type="button", class="btn btn-success", ng-click="unlockGame(lockedGame)") Unlock
+            //- user isn't connected
+            div(ng-if="!userData.user")
+                h4 Please connect in order to unlock this game
+                button(type="button", class="btn btn-success", ng-click="login()") Connect
+            //- user doesn't have enough credits to unlock game
+            div(ng-if="userData.user.points < lockedGame.price")
+                h4 You don't have enough coins
+                button(type="button", class="btn btn-success", ng-click="goHome('WIN_COINS')") Win Coins
+//- CPM STAR CODE
+//script.
+//    (function(i,w,d,p,c,e,o,a,s,t){
+//        p.poolid = 57653; //Pool ID assigned by CPMStar
+//    c.background = null; //URL of background image to override default image
+//    c.close = null; //URL of start game/video button to override default image
+//    c.type = 'game'; //Use built in "Start Video" or "Start Game" button (video|game, default: game)
+//    o.select = '.embedding'; // holder of the game
+//        t=d.getElementsByTagName('script');if(!w[i]){w[i]={ads:[]};s=d.createElement('script');s.src=(d.location.protocol=='https:'?'//server':'//cdn')+'.cpmstar.com/cached/js/global_v100.pack.js?poolid='+p.poolid;s.type='text/javascript';s.async='';t[0].parentNode.insertBefore(s,t[0]);}w[i].ads.push(a={params:p,config:c,events:e,overlay:o,placeholder:t[t.length-1]});})('cpmstar',window,document,{},{},{},{});
+//
+

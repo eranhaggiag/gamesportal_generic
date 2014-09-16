@@ -1,0 +1,24 @@
+.header-top
+    .logo(ng-click="goHome()")
+        img(ng-src="{{appLogo}}", width='320')
+
+    .toolbar-icons
+        span.addthis_toolbox.addthis_default_style
+            a.addthis_button_facebook_like(fb:like:layout="button_count", addthis:url="{{socialBtns.facebookPage}}")
+            //- a.addthis_button_twitter_follow_native(tf:screen_name="DaRealMojoGames", tf:show-screen-name="false", tf:show-count="false")
+            a.addthis_button_google_plusone(g:plusone:href="{{socialBtns.googlePage}}", g:plusone:size="medium")
+    .corner-toolbox-icons
+        span.glyphicon.glyphicon-lock(ng-click="goHome('privacy')")
+        a(href="mailto:gamestabportal@gmail.com")
+            span.glyphicon.glyphicon-envelope
+
+    .banner(ng-class="{'in-game': !fixedHeader}")
+        .bg-banner(ng-cloak)
+            div(ng-if="appName==='Gamestab'")
+                .bg-ad
+                    include leaderboard-gamestab
+            div(ng-if='appName==="Mojo Games"')
+                .bg-ad(ng-show='!fixedHeader')
+                    adsense-ad(ad-sense-loaded="adSenseLoaded", ad-slot-id="8399253601")
+                .bg-ad(ng-show='fixedHeader')
+                    adsense-ad(ad-sense-loaded="adSenseLoaded", ad-slot-id="6922520402")

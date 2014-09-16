@@ -1,0 +1,56 @@
+doctype html
+html(id="ng-app", ng-app="myApp")
+    head
+        meta(charset="utf-8")
+        meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+        meta(name='google', content='notranslate')
+        <!--[if lt IE 9]>
+        script(src="http://modernizr.com/downloads/modernizr-latest.js")
+        <![endif]-->
+        title Gamesportal - Your One-Stop Games Portal
+        link(rel="shortcut icon", href="./img/favicon.ico")
+
+
+
+        //- bizigames inline install
+        //- link(href='https://chrome.google.com/webstore/detail/heplncibihkggagnaaoigdhkgjmmllme', rel='chrome-webstore-item')
+        //- mojo-games inline install
+        //- link(href='https://chrome.google.com/webstore/detail/fmpeljkajhongibcmcnigfcjcgaopfid', rel='chrome-webstore-item')
+        //- gamestab inline install
+        link(href='https://chrome.google.com/webstore/detail/amlhfkalaoikfbpoolhpdhignhjhlhko', rel='chrome-webstore-item')
+
+        script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+        script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js')
+
+        script(type='text/ng-template', id='main.html').
+            <div class="mansonry-container">
+                <span ng-repeat="game in games track by $index" class="mansonry-brick">
+                    <a ng-click="runGame(game, $event)">
+                        <div ng-if="game.hot" class="badge-overlay hot-overlay">
+                            <div class="ribbon-text">Hot</div>
+                        </div>
+                        <div ng-if="game.premium" class="badge-overlay premium-overlay">
+                            <div class="ribbon-text">Premium</div>
+                        </div>
+                        <img ng-src="{{game.thumbnails[0].url" class="game-thumbnail" width='120' height='120'>
+                    </a>
+                </span>
+            </div>
+
+        <!-- inject:js -->
+        <!-- endinject -->
+
+        <!-- inject:css -->
+        <!-- endinject -->
+
+    body(ng-controller="MainCtrl")
+        #fb-root
+
+        header.smaller(ng-cloak)
+            include includes/header
+
+        .main(ui-view)
+        include includes/modals
+        script.
+            //1b85b5e71418c708b5ccaa77089bf14e
+

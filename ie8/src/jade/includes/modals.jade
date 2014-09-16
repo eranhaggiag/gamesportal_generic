@@ -1,0 +1,137 @@
+.modals(ng-cloak, ng-switch="overlayID")
+    .modal-overlay-fade.contact(ng-switch-when="contact", overlay="'contact'")
+        .modal-dialog.contact
+            .close-button(ng-click="closeOverlay('contact')")
+            h1 Contact {{ appName }}
+            h4 Send us a message and we will get back to you
+            hr
+            .contact-form-wrapper
+                form.form-horizontal(method="post", action="//forms.brace.io/mojogamesportal@gmail.com")
+                    fieldset
+                        //- input(type="hidden", name="_next", value="//www.mojo-games.com")
+                        .form-group
+                            label.col-md-4.control-label(for='name-input') Name
+                            .col-md-5
+                                input.form-control.input-md(name='name-input', type='text', placeholder='Your name...')
+                        // Text input
+                        .form-group
+                            label.col-md-4.control-label(for='_replyto') Email
+                            .col-md-5
+                                input.form-control.input-md(name='_replyto', type='email', placeholder='Your email...')
+                        // Select Basic
+                        .form-group
+                            label.col-md-4.control-label(for='subject-input') Subject
+                            .col-md-5
+                                select.form-control(name='subject-input')
+                                    option(value='game') Game
+                                    option(value='advertising') Advertising
+                                    option(value='terms') Terms
+                                    option(value='question') Question
+                                    option(value='other') Other
+                        // Textarea
+                        .form-group
+                            label.col-md-4.control-label(for='message-input') Message
+                            .col-md-5
+                                textarea.form-control(name='message-input', placeholder="Your message...")
+                        // Button (Double)
+                        .form-group
+                            label.col-md-4.control-label(for='button1id')
+                            .col-md-8
+                                button#button1id.btn.btn-primary(name='button1id', type="submit") Submit
+                                button#button2id.btn.btn-default(name='button2id', type="reset") Reset
+    .modal-overlay-fade.privacy(ng-switch-when="tos", overlay="'tos'")
+        .modal-dialog.privacy
+            .close-button(ng-click="closeOverlay('tos')")
+            h1.sans Terms Of Service
+            .privacy-container
+                h3 Your Acceptance:
+                p
+                    | By visiting and using this website (including all the content existing through {{ appName }}.com domain),
+                    | you signify your assent to both these Privacy policy, published at:&nbsp;
+                    a(ng-click="goHome('privacy')", href="#") Privacy Policy
+                    | &nbsp;and the Terms and conditions which are follow in this page.
+                    br
+                    br
+                    | If you do not agree to any of those, please do not use {{ appName }}.com
+                h3 {{ appName }} website:
+                p
+                    | These Terms Of Service (TOS) apply to all of {{ appName }}'s users, including content contributors.
+                    br
+                    br
+                    | {{ appName }} contains links to 3rd party websites which are not owned or controlled by {{ appName }}.
+                    br
+                    br
+                    | {{ appName }} has no responsibility for content, privacy policy or any other aspect of those third party websites.
+                    br
+                    br
+                    | {{ appName }} can not edit the content of any third party website.
+                    br
+                    br
+                    | By using {{ appName }} you expressly relieve {{ appName }} from any liability arising from the use of 3rd party websites.
+                h3 Access:
+                p
+                    | A. {{ appName }} allow you to use the website only if:
+                    br
+                    br
+                    | 1. You are the original creator of the content or has distribution rights for it
+                    br
+                    br
+                    | 2. You will not modify any part of the site.
+                    br
+                    br
+                    | B. In order to access some of {{ appName }}'s features you will need to have an integration with your Facebook account.
+                    br
+                    br
+                    | You may never use other people account without their permission.
+                    br
+                    br
+                    | When creating your account, you must provide accurate information.
+                    br
+                    br
+                    | You are the only responsible to your account, {{ appName }} won't be liable for your losses caused by unauthorized use of your account.
+                    br
+                    br
+                    | C. You agree not to use or launch any robot/automated system that will access {{ appName }}. Including any kind of message senders.
+                    br
+                    br
+                    | We allow search engine robots to index our site.
+                h3 Intellectual Property Rights:
+                p
+                    | The content of {{ appName }}, except the user's submissions, including without limitation the software, images, text,design,scripts, graphics,text, logo and any other relevant feature or service is subject to copyright and intellectual property rights under United States and foreign laws and international conventions.
+                    br
+                    | Content on the Website is provided to you AS IS for your information and personal use only and may not
+                    | be used, copied, reproduced, distributed, transmitted, broadcast, displayed, sold,
+                    | licensed, or otherwise exploited for any other purposes whatsoever without the
+                    | prior written consent of the respective owners.
+    .modal-overlay-fade.privacy(ng-switch-when="privacy", overlay="'privacy'")
+        .modal-dialog.privacy
+            .close-button(ng-click="closeOverlay('privacy')")
+            h1.sans Privacy Policy
+            .privacy-container
+                h3 Your Safety
+                p
+                    | The internet provides some amazing experiences, but it is a largely unregulated system, and this naturally presents some issues regarding user safety. {{ appName }} is a general audience website, which appeals to users of both genders, all ages, and many nationalities. Some users (depending on age, internet experience, and other factors) will be more vulnerable than others, and it's important to know about the features (and perhaps more importantly, the absence of features) which help make {{ appName }} a safer place to play.
+                    br
+                    br
+                    | {{ appName }} very rarely communicates directly with users, but much more importantly, {{ appName }} does not facilitate communication between users. There are no forums or chat rooms on {{ appName }}, and this is instrumental in preventing inappropriate contact and bullying.
+                    br
+                    br
+                    | The games on {{ appName }} have been systematically checked to ensure that they are appropriate for the various age groups who are likely to play them. While it can't be said that none of the games feature violence (even Pac Man may be regarded as violent), we have tried to keep the content made available on {{ appName }} consistent with what would be regarded as reasonable to show on a television channel throughout a typical day. We have worked hard to ensure that players on {{ appName }} are not inappropriately exposed to bad language, overtly sexual themes or imagery, references to illegal drug use, scenarios or characters glorifying drinking, smoking, or gambling, or depictions of extreme violence and gore. Users should be aware that the games made available to users on {{ appName }} may vary according to the geo location of the user, the time of day the site is being accessed, and other factors.
+                h3 Your Privacy
+                p
+                    | The privacy of users is extremely important to us. Below you will find information detailing the types of data received and collected by {{ appName }} and other parties, and how it is used.
+                    br
+                    br
+                    | Log Files: As with all websites, {{ appName }}'s servers record details of which files are accessed, along with data such as the time the request was made and the IP (Internet Protocol) address of the user. Although each computer may have a unique IP address, this identifier is never linked to any personal information such as the name or street address of the user. Log files have been used universally since the dawn of the internet and are invaluable in identifying errors with web pages and, in the case of {{ appName }}, with the games. Our servers are set to keep daily log files for a maximum of one month, after which they are permanently deleted.
+                    br
+                    br
+                    | Cookies / Flash Shared Objects: To help provide an enhanced user experience, most modern browsers allow websites to store small amounts of data on users' computers. This information is stored in the form of small text files called 'cookies' or, in the case of the interactive content on {{ appName }}, in 'Flash Shared Objects'. Examples of the information stored might include the number of games a user has played, the country the user is in (as taken from the user's IP address), and the level progress made on a game. Unless a user specifically enters personal data, no data stored is personally identifiable. You can at any time delete the cookies and Flash Shared Objects your computer holds - just check your browser's privacy settings.
+                    br
+                    br
+                    | Tracking: Sometimes our menu system and the games on {{ appName }} may send information to third-party tracking services. The information collected (while never personally identifiable) is useful, for example, in providing general insights into visitor numbers and which games are most popular.
+                    br
+                    br
+                    | Advertising Networks: Keeping a popular website up and running can be expensive, and so sometimes we show advertisements which help generate income. The ads are typically served by third party ad networks, and although we try hard to ensure that the companies advertising are reliable and honest, the reality of the internet means that our influence over the ever-changing offerings of these networks is limited. Ad networks will typically show ads based on the kind of users they expect to be playing on {{ appName }}, and as described above, may store small amounts of data on a user's computer. This information, which is never personally identifiable, may help advertisers target an individual user based on their visit to {{ appName }} and other sites and pages they have viewed in the past. This kind of advertising, which has become increasingly popular, is called retargeting. Users are now given greater control than ever over how ad networks use this data. You can opt out of the cookie / retargeting functions of many of these networks by clicking here.
+                    br
+                    br
+                    | Unless otherwise stated, all the games on {{ appName }} are copyrighted by their respective owners and / or authors. The collection of games is provided as freeware, freely distributable, public domain or open source. Although we have mostly stopped accepting submissions from new developers and publishers, those who have already successfully submitted games may continue to do so. The {{ appName }} logo, design and related indicia are copyright (c) from 2014 and beyond until end of time . {{ appName }} is a trademark relating to online games and gaming.

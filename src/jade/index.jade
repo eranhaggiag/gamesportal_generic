@@ -1,0 +1,65 @@
+doctype html
+html(ng-app="myApp")
+    head
+        meta(charset="utf-8")
+        meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+        meta(name='google', content='notranslate')
+        title {{title}}
+        link(rel="shortcut icon", href="./img/favicon.ico")
+
+        link(href='https://chrome.google.com/webstore/detail/amlhfkalaoikfbpoolhpdhignhjhlhko', rel='chrome-webstore-item')
+
+        script(src='/js/config.js')
+        script(src='//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
+        script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js')
+
+        script(type='text/ng-template', id='main.html').
+            <div masonry="masonryOptions" load-images="false" infinite-scroll="loadMore()" class="masonry-container">
+                <div ng-repeat="game in games track by $index" ng-class="getGameClass(game, $index)" class="masonry-brick">
+                    <a ng-click="runGame(game, $event)">
+                        <div ng-if="game.hot" class="badge-overlay hot-overlay">
+                            <div class="ribbon-text">Hot</div>
+                        </div>
+                        <div ng-if="game.premium" class="badge-overlay premium-overlay">
+                            <div class="ribbon-text">Premium</div>
+                        </div>
+                        <img ng-src="{{game.largeThumbnail.url || game.thumbnails[0].url}}" class="game-thumbnail" width='120' height='120'>
+                        <div ng-bind="game.name" class="name"></div>
+                    </a>
+                </div>
+            </div>
+
+        script(async, type="text/ng-template", id="searchTypeaheadTemplate.html").
+            <a><img ng-src="{{match.model.thumbnails[0].url}}" width="16">&nbsp;<span bind-html-unsafe="match.label | typeaheadHighlight:query"></span></a>
+
+        <!-- inject:js -->
+        <!-- endinject -->
+
+        <!-- inject:css -->
+        <!-- endinject -->
+
+    body(ng-controller="MainCtrl")
+        #fb-root
+
+        script.
+           (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            var src = {{fbSRC}};
+            if (d.getElementById(id)) {
+                d.getElementById(id).src = src;
+                return;
+            }
+            js = d.createElement(s); js.id = id;
+            js.src = src;
+            fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+
+
+
+        header.smaller(ng-cloak)
+            include includes/header
+
+        .main(ui-view)
+        include includes/modals
+        script.
+            //1b85b5e71418c708b5ccaa77089bf14e

@@ -1,0 +1,5 @@
+//in case IE
+iframe(ng-if="browser==='IE'", width="{{game.width}}", height="{{game.height}}", ng-src="{{game.swf_url}}", style="background:black", background="black")
+//in case not ie
+flash(ng-if="browser!=='IE'", width="{{game.width}}", height="{{game.height}}", ng-src="{{game.swf_url}}", style="background:black", background="black")
+

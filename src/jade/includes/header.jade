@@ -1,0 +1,53 @@
+.header-top
+    .logo(ng-click="goHome()")
+        img(ng-src="{{appLogo}}", width='320')
+    .coins(ng-click="goHome('WIN_COINS')")
+        .coin-container
+            .top-text {{'COINS_COLLECTED' | translate }}
+            .amount
+                span.coin-img
+                    img(src="./img/coins2.png", height='75', width='125')
+                span.amount-text(ng-if="!userData.user") {{10000 | number }}
+                span.amount-text(ng-if="userData.user", aio-counter="{{userData.user.points}}")
+    .rays-container
+        #rays
+
+    .corner-toolbox-icons
+        img(ng-src="{{selectedNationality.flag}}", ng-mouseenter="showLanguageMenu()", width='20', height='20')
+        .language-box(ng-cloak, ng-show='dropdownFlags', ng-mouseenter="keepLanguageMenu()", ng-mouseleave="showLanguageMenu()")
+            ul
+                li(ng-repeat="nationality in nationalities | filter: '!' + selectedNationality.language", ng-click="changeLanguage(nationality)")
+                    img(ng-src="{{nationality.flag}}", width='20', height='20')
+                    span {{nationality.language}}
+        span.glyphicon.glyphicon-lock(ng-click="goHome('privacy')")
+        a(href="mailto:{{mailAddress}}")
+            span.glyphicon.glyphicon-envelope
+
+    .search-box(ng-cloak)
+        .input-group
+            input.form-control(type="text", placeholder="{{'FIND_GAME'| translate}}", ng-model="gameSearch",
+            typeahead-template-url="searchTypeaheadTemplate.html",
+            typeahead-on-select="runGame(gameSearch)",
+            typeahead="game as game.name for game in allGames | filter:{name:$viewValue} | limitTo:8")
+            .input-group-btn
+                button.btn.btn-primary(type="button")
+                    span.glyphicon.glyphicon-search
+    .user-info(ng-cloak)
+        span.details
+            .username(ng-if="userData.user.info") {{userData.user.info.displayName || userData.user.info.name}}
+            .username.connect(ng-if="!userData.user.info", ng-click="login()") {{'CONNECT' | translate}}
+            .action(ng-click="logout()", ng-if="userData.user.info") {{'SIGNOUT' | translate}}
+        span.profile-pic
+            img(ng-if="userData.user.info", ng-src="{{userData.user.info.profilePic}}")
+            img.connect(ng-if="!userData.user.info", width="55", height="55", src="./img/anonymous.png", ng-click="login()")
+
+
+    .toolbar-icons
+        span.addthis_toolbox.addthis_default_style
+            a.addthis_button_facebook_like(fb:like:layout="button_count", addthis:url="{{socialBtns.facebookPage}}")
+            a.addthis_button_google_plusone(g:plusone:href="{{socialBtns.googlePage}}", g:plusone:size="medium")
+
+.header-bottom.smaller
+    .banner(ng-class="{'in-game': !fixedHeader}")
+        .bg-banner(ng-cloak)
+            div.bg-ad.placeholder
